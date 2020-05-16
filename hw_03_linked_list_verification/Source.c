@@ -33,22 +33,21 @@ int main()
 		printf("12 - Multiples of p\n");
 		printf("0 - Exit\n");
 		scanf("%d", &menu);
-		if (menu == 1)
-			output(&p);
-		else if (menu == 2)
+		switch(menu)
 		{
+		case 0:return 0; break;
+		case 1:output(&p); break;
+		case 2: {
 			while (getchar() != '\n');
 			scanf("%f", &number);
 			input(&p, number);
-		}
-		else if (menu == 3)
-		{
+		}break;
+		case 3: {
 			while (getchar() != '\n');
 			scanf("%f", &number);
 			add_last(&p, number);
-		}
-		else if (menu == 4)
-		{
+		}break;
+		case 4: {
 			while (getchar() != '\n');
 			printf("Enter N:");
 			scanf("%d", &N);
@@ -56,30 +55,21 @@ int main()
 			printf("Enter new symbol:");
 			scanf("%f", &number);
 			add_N(&p, number, N);
-		}
-		else if (menu == 5)
-			delete_first(&p);
-		else if (menu == 6)
-			delete_last(&p);
-		else if (menu == 7)
-			printf("length of list = %.2f\n", length_list(&p));
-		else if (menu == 8)
-			printf("%.2f\n", sum_list(&p));
-		else if (menu == 9)
-			max_list(&p);
-		else if (menu == 10)
-			min_list(&p);
-		else if (menu == 11)
-			average(&p);
-		else if (menu == 12)
-		{
+		}break;
+		case 5:delete_first(&p); break;
+		case 6:delete_last(&p); break;
+		case 7:printf("length of list = %.2f\n", length_list(&p)); break;
+		case 8:printf("%.2f\n", sum_list(&p)); break;
+		case 9:max_list(&p); break;
+		case 10:min_list(&p); break;
+		case 11:average(&p); break;
+		case 12: {
 			printf("Enter the number:");
 			scanf("%d", &num);
 			pcount(&p, num);
+		}break;
+		default: printf("Error\n");
 		}
-		else if (menu == 0)
-			return 0;
-		else printf("Error\n");
 	}
 
 	while (getchar() != '\n');
