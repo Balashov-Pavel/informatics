@@ -9,6 +9,5 @@ typedef struct stack {
 input(struct stack** sHead, const char str);
 char pop(struct stack** sHead);
 is_empty(struct stack** sHead);
-check(const char* str);
 
 #endif
