@@ -28,20 +28,6 @@ dequeue(struct queue *queue)
 		queue->head->prev = NULL;
 }
 
-int length(struct queue queue)
-{
-	int length = 0;
-
-	struct node *q = queue.head;
-
-	while (q)
-	{
-		length++;
-		q = q->next;
-	}
-	return length;
-}
-
 is_empty(struct queue queue)
 {
 	if (queue.head == NULL)
