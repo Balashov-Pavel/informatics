@@ -3,45 +3,31 @@
 #include <stdlib.h>
 #include "queue.h"
 
-float sum(struct queue queue)
-{
-	float sum = 0;
-
-	struct node *q = queue.head;
-
-	while (q)
-	{
-		sum += q->data;
-		q = q->next;
-	}
-
-	return sum;
-}
-
 super_average(float *array, const int n, const int k)
 {
 	int i;
-	//Инициализация очереди
+	float sum = 0;
+	int length = 0;
+
 	struct queue queue;
 	queue.head = NULL;
 	queue.tail = NULL;
 
-	/*Добавление в очередь первых k элементов.
-	*/
 	for (i = 0; i < k; i++)
 	{
-		//Добавление нового элемента в очередь
 		enqueue(&queue, array[i]);
-		printf("%.2f ", sum(queue) / length(queue));
+		sum += array[i];
+		length++;
+		printf("%.2f ", sum / length);
 	}
 	
 	for (i = k; i < n; i++)
 	{
-		//Удаление первого элемента
 		dequeue(&queue);
-		//Добавление нового элемента
+		sum -= array[i - k];
 		enqueue(&queue, array[i]);
-		printf("%.2f ", sum(queue) / length(queue));
+		sum += array[i];
+		printf("%.2f ", sum / length);
 	}
 	printf("\n");
 }
