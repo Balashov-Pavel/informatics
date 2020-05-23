@@ -49,7 +49,7 @@ super_average(float *array, const int n, const int k)
 int main()
 {
 	int n, k, i;
-	printf("Enter n and k:");
+	printf("n, k:");
 	scanf("%d %d", &n, &k);
 
 	float *arr = (float *)malloc(n * sizeof(float));
