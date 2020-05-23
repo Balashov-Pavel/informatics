@@ -20,6 +20,5 @@ typedef struct queue
 
 enqueue(struct queue *queue, const float data);
 dequeue(struct queue *queue);
-int length(struct queue queue);
 is_empty(struct queue queue);
 #endif 
