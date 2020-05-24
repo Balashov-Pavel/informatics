@@ -3,76 +3,63 @@
 #include <stdlib.h>
 #include "queue.h"
 
-int main()
+function(int *arr, const int n)
 {
-	int n, i, num, sum_1 = 0, sum_2 = 0;
-	printf("Enter n:");
-	scanf("%d", &n);
+	int i, sum_1 = 0, sum_2 = 0;
 
-	//Queues and nodes for both windows
-	struct queue queue_1;
-	queue_1.head = NULL;
-	queue_1.tail = NULL;
-	struct node *q_1 = NULL;
+	struct queue queue;
+	queue.head = NULL;
+	queue.tail = NULL;
 
-	struct queue queue_2;
-	queue_2.head = NULL;
-	queue_2.tail = NULL;
-	struct node *q_2 = NULL;
+	for (i = 0; i < n; i++)
+		enqueue(&queue, arr[i]);
 
-	//Enter first element in the first cashbox
-	scanf("%d", &num);
-	enqueue(&queue_1, num);
-	q_1 = queue_1.head;
-	sum_1 += q_1->data;
-	//printf("Sum 1 = %d\n", sum_1);
+	struct node *q = queue.head;
 
-	//Enter second element in the second cashbox
-	scanf("%d", &num);
-	enqueue(&queue_2, num);
-	q_2 = queue_2.head;
-	sum_2 += q_2->data;
-	//printf("Sum 2 = %d\n", sum_2);
-
-	for (i = 2; i < n; i++)
+	for (i = 0; i < n; i++)
 	{
 		if (sum_1 == sum_2)
 		{
-			scanf("%d", &num);
-			enqueue(&queue_1, num);
-			q_1 = q_1->next;
-			sum_1 += q_1->data;
-			//printf("Sum 1 = %d\n", sum_1);
+			sum_1 += q->data;
+			q = q->next;
+			dequeue(&queue);
 
-			scanf("%d", &num);
-			enqueue(&queue_2, num);
-			q_2 = q_2->next;
-			sum_2 += q_2->data;
-			//printf("Sum 2 = %d\n", sum_2);
+			sum_2 += q->data;
+			q = q->next;
+			dequeue(&queue);
 			i++;
 		}
 		else if (sum_1 > sum_2)
 		{
-			scanf("%d", &num);
-			enqueue(&queue_2, num);
-			q_2 = q_2->next;
-			sum_2 += q_2->data;
-			//printf("Sum 2 = %d\n", sum_2);
+			sum_2 += q->data;
+			q = q->next;
+			dequeue(&queue);
 		}
 		else
 		{
-			scanf("%d", &num);
-			enqueue(&queue_1, num);
-			q_1 = q_1->next;
-			sum_1 += q_1->data;
-			//printf("Sum 1 = %d\n", sum_1);
+			sum_1 += q->data;
+			q = q->next;
+			dequeue(&queue);
 		}
 	}
-
 	if (sum_1 > sum_2)
 		printf("Result:%d\n", sum_1);
 	else
 		printf("Result:%d\n", sum_2);
+}
+
+int main()
+{
+	int n, i;
+	printf("Enter n:");
+	scanf("%d", &n);
+
+	int *arr = (int *)malloc(n * sizeof(int));
+	for (i = 0; i < n; i++)
+		scanf("%d", &arr[i]);
+	
+	function(arr, n);
+
 	while (getchar() != '\n');
 	getchar();
 }
